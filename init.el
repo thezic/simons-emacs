@@ -99,12 +99,57 @@
 ;; breadcrumbs
 (require 'breadcrumb)
 
+;; bitlbee
+(require 'bitlbee)
+
+(defvar bitlbee-password "geheim")
+ 
+ (add-hook 'erc-join-hook 'bitlbee-identify)
+ (defun bitlbee-identify ()
+   "If we're on the bitlbee server, send the identify command to the 
+ &bitlbee channel."
+   (when (and (string= "localhost" erc-session-server)
+              (string= "&bitlbee" (buffer-name)))
+     (erc-message "PRIVMSG" (format "%s identify %s" 
+                                    (erc-default-target) 
+                                    bitlbee-password))))
+
+;; (add-to-hook 'erc-insert-modify-hook 'mah/maybe-wash-im-with-w3m)
+;;   (autoload 'w3m-region "w3m" "Render region using w3m")
+;;   (defun mah/maybe-wash-im-with-w3m ()
+;;     "Wash the current im with emacs-w3m."
+;;     (save-restriction
+;;       (with-current-buffer (current-buffer)
+;;         (let ((case-fold-search t))
+;; 	  (goto-char (point-min))
+;; 	  (when (re-search-forward "<HTML>.*</HTML>" nil t)
+;; 	    (print (match-string 0))
+;; 	    (narrow-to-region (match-beginning 0) (match-end 0))
+;; 	    (let ((w3m-safe-url-regexp mm-w3m-safe-url-regexp)
+;; 		  w3m-force-redisplay)
+;; 	      (w3m-region (point-min) (point-max))
+;; 	      (goto-char (point-max))
+;; 	      (delete-char -2))
+;; 	    (when (and mm-inline-text-html-with-w3m-keymap
+;; 		       (boundp 'w3m-minor-mode-map)
+;; 		       w3m-minor-mode-map)
+;; 	      (add-text-properties
+;; 	       (point-min) (point-max)
+;; 	       (list 'keymap w3m-minor-mode-map
+;; 		     ;; Put the mark meaning this part was rendered by emacs-w3m.
+;; 		     'mm-inline-text-html-with-w3m t))))))))
 
 ;; Keyboard bindings
 (global-set-key (kbd "M-<right>") 'next-buffer)
 (global-set-key (kbd "M-<left>") 'previous-buffer)
 (global-set-key (kbd "C-M-<SPC>") 'speedbar)
 (global-set-key (kbd "<RET>") 'newline-and-indent)
+
+(global-set-key [(meta j)] 'bookmark-and-jump-to-def)
+(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<down>") 'shrink-window)
+(global-set-key (kbd "S-C-<up>") 'enlarge-window)(global-set-key [(shift meta j)] 'bc-previous)
 
 (put 'scroll-left 'disabled nil)
 (custom-set-variables
