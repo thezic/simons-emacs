@@ -8,7 +8,6 @@
   (bc-set)
   (rope-goto-definition)
   )
-(global-set-key [(meta j)] 'bookmark-and-jump-to-def)
-(global-set-key [(shift meta j)] 'bc-previous)
+
 
 (provide 'various)
