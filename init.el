@@ -52,7 +52,9 @@
 ;;     (global-auto-complete-mode t)
 (require 'auto-complete)
 (require 'auto-complete-config)
-(global-auto-complete-mode t)
+;;(global-auto-complete-mode t)
+
+
 
 ;; Line numbers
 (require 'linum)
@@ -100,48 +102,13 @@
 (require 'breadcrumb)
 
 ;; bitlbee
-(require 'bitlbee)
 
-(defvar bitlbee-password "geheim")
- 
- (add-hook 'erc-join-hook 'bitlbee-identify)
- (defun bitlbee-identify ()
-   "If we're on the bitlbee server, send the identify command to the 
- &bitlbee channel."
-   (when (and (string= "localhost" erc-session-server)
-              (string= "&bitlbee" (buffer-name)))
-     (erc-message "PRIVMSG" (format "%s identify %s" 
-                                    (erc-default-target) 
-                                    bitlbee-password))))
-
-;; (add-to-hook 'erc-insert-modify-hook 'mah/maybe-wash-im-with-w3m)
-;;   (autoload 'w3m-region "w3m" "Render region using w3m")
-;;   (defun mah/maybe-wash-im-with-w3m ()
-;;     "Wash the current im with emacs-w3m."
-;;     (save-restriction
-;;       (with-current-buffer (current-buffer)
-;;         (let ((case-fold-search t))
-;; 	  (goto-char (point-min))
-;; 	  (when (re-search-forward "<HTML>.*</HTML>" nil t)
-;; 	    (print (match-string 0))
-;; 	    (narrow-to-region (match-beginning 0) (match-end 0))
-;; 	    (let ((w3m-safe-url-regexp mm-w3m-safe-url-regexp)
-;; 		  w3m-force-redisplay)
-;; 	      (w3m-region (point-min) (point-max))
-;; 	      (goto-char (point-max))
-;; 	      (delete-char -2))
-;; 	    (when (and mm-inline-text-html-with-w3m-keymap
-;; 		       (boundp 'w3m-minor-mode-map)
-;; 		       w3m-minor-mode-map)
-;; 	      (add-text-properties
-;; 	       (point-min) (point-max)
-;; 	       (list 'keymap w3m-minor-mode-map
-;; 		     ;; Put the mark meaning this part was rendered by emacs-w3m.
-;; 		     'mm-inline-text-html-with-w3m t))))))))
+;; pybufswitch
+(require 'pybufswitch)
 
 ;; Keyboard bindings
-(global-set-key (kbd "M-<right>") 'next-buffer)
-(global-set-key (kbd "M-<left>") 'previous-buffer)
+(global-set-key (kbd "M-<right>") 'next-py-buf)
+(global-set-key (kbd "M-<left>") 'prev-py-buf)
 (global-set-key (kbd "C-M-<SPC>") 'speedbar)
 (global-set-key (kbd "<RET>") 'newline-and-indent)
 
@@ -157,7 +124,8 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(majmodpri-sort-after-load (quote (chart gpl django-html-mumamo nxhtml-autoload javascript-mode))))
+ '(majmodpri-sort-after-load (quote (chart gpl django-html-mumamo nxhtml-autoload javascript-mode)))
+ '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
