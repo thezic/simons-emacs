@@ -126,6 +126,7 @@
   ;; If there is more than one, they won't work right.
  '(majmodpri-sort-after-load (quote (chart gpl django-html-mumamo nxhtml-autoload javascript-mode)))
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
+ '(inhibit-startup-screen t)
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
