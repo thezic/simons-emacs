@@ -100,11 +100,13 @@
 (require 'various)
 ;; breadcrumbs
 (require 'breadcrumb)
-
-;; bitlbee
-
 ;; pybufswitch
 (require 'pybufswitch)
+;; Column numbers
+(setq column-number-mode t)
+;; Highlight column 80 in python mode
+(require 'column-marker)
+(add-hook 'python-mode-hook (lambda () (interactive) (column-marker-3 80)))
 
 ;; Keyboard bindings
 (global-set-key (kbd "M-<right>") 'next-py-buf)
@@ -125,6 +127,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(majmodpri-sort-after-load (quote (chart gpl django-html-mumamo nxhtml-autoload javascript-mode)))
+ '(mouse-wheel-progressive-speed nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
  '(inhibit-startup-screen t)
 (custom-set-faces
